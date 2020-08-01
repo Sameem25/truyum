@@ -45,13 +45,7 @@ create table cart
 values(0),(3);
 
 
-
-
-
-
-
-
-
+--To edit and update menu items
 create procedure Edit_Menu @Item_id int
 as 
 begin
@@ -75,6 +69,7 @@ where Item_id=@Item_id
 end
 go
 
+--To insert into cart
  create procedure insert_cart @user_id int, @Item_id int
  as
  begin 
@@ -86,8 +81,10 @@ exec insert_cart 2,1;
 exec insert_cart 2,2;
 exec insert_cart 2,3;
 
-select a.Name,a.Free_delivery,a.price from Menu_Items_Customer as a inner join cart as b 
-on a.Item_id=b.Item_id;
+--To display cart items and total
+select b.user_id,a.Name,a.Free_delivery,a.price from Menu_Items_Customer as a inner join cart as b 
+on a.Item_id=b.Item_id
+where user_id=2;
 
 create procedure view_total
 as
@@ -99,6 +96,7 @@ end
 go
 exec view_total;
 
+--to remove item from cart
 create procedure remove_item @user_id int,@Item_id int
 as
 begin
